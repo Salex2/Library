@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace LibraryData.Models
+namespace Library.Data.Models
 {
-    class Class1
+    public class Status
     {
+        public int Id { get; set; }
+
+        [Required] public string Name { get; set; }
+
+        [Required] public string Description { get; set; }
     }
 }
