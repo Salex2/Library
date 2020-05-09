@@ -1,6 +1,6 @@
 ﻿using Library.Data;
-
-
+using LibraryData;
+using LibraryServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,12 +29,15 @@ namespace Library
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-            }); 
-            
+            });
 
-            services.AddDbContext<LibraryContext>(options 
+            services.AddSingleton(Configuration);
+            services.AddScoped<ILibraryAsset,LibraryAssetService>
 
-                => options.UseSqlServer(Configuration.GetConnectionString("LibraryConnection")));
+
+            services.AddDbContext<LibraryContext>(x 
+
+                => x.UseSqlServer(Configuration.GetConnectionString("LibraryConnection")));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
