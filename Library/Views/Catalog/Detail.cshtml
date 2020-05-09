@@ -1,0 +1,36 @@
+﻿@model Library.Models.Catalog.AssetDetailModel;
+<div class="container">
+    <div class="page-item clearfix ">
+
+        <h2 class="text-muted">View Library Item</h2>
+    </div> 
+
+</div>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <img class="detailImage" src="@Model.ImgUrl" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <p id="itemTitle">@Model.Title</p>
+                <p id="itemAuthor">@Model.AuthorOrDirector</p>
+                <p id="itemStatus">@Model.Status</p>
+                <p id="itemType">@Model.Type</p>
+                <p id="itemLocation">@Model.CurentLocation</p>
+
+                @if(Model.Status =="Checked out")
+                {
+                    <p id="itemPatron">Checked out by: @Model.PatroName</p>
+                }
+                @if(Model.Status == "Available")
+                {
+                    <p><a class="btn btn-lg btn-info" role="button" asp-controller="Catalog" asp-action="Checkout" asp-route="@Model.AssetId">Checkout</a></p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

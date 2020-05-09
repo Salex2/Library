@@ -32,7 +32,7 @@ namespace Library
             });
 
             services.AddSingleton(Configuration);
-            services.AddScoped<ILibraryAsset,LibraryAssetService>
+            services.AddScoped<ILibraryAsset, LibraryAssetService>();
 
 
             services.AddDbContext<LibraryContext>(x 
