@@ -6,10 +6,7 @@ namespace Library.Data
 {
     public class LibraryContext : DbContext
     {
-        public LibraryContext()
-        {
-
-        }
+        
 
         public LibraryContext(DbContextOptions options) : base(options)
         {
