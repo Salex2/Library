@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Library.Data.Models;
 
 namespace Library.Data
@@ -11,13 +12,15 @@ namespace Library.Data
         IEnumerable<CheckoutHistory> GetCheckoutHistory(int id);
         void PlaceHold(int assetId, int libraryCardId);
         void CheckoutItem(int id, int libraryCardId);
-        void CheckInItem(int id);
+        void CheckInItem(int id, int LibraryCardId);
         Checkout GetLatestCheckout(int id);
         int GetNumberOfCopies(int id);
         bool IsCheckedOut(int id);
+        string GetCurrentCheckoutPatron(int assetId);
+
 
         string GetCurrentHoldPatron(int id);
-        string GetCurrentHoldPlaced(int id);
+        DateTime GetCurrentHoldPlaced(int id);
         string GetCurrentPatron(int id);
         IEnumerable<Hold> GetCurrentHolds(int id);
 

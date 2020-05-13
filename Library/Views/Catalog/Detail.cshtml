@@ -1,11 +1,11 @@
-﻿@model Library.Models.Catalog.AssetDetailModel;
+﻿@using Library.Models.Catalog;
 
 
 <div class="container">
     <div class="page-item clearfix ">
 
         <h2 class="text-muted">View Library Item</h2>
-    </div> 
+    </div>
 
 </div>
 
@@ -50,7 +50,7 @@
                         <td class="itemLabel">Call number:</td>
                         <td class="itemValue">@Model.DeweyCallNumber</td>
                     </tr>
-                    <tr>    
+                    <tr>
                         <td class="itemLabel">Replacement Cost:</td>
                         <td class="itemValue">@Model.Cost</td>
                     </tr>
@@ -58,4 +58,61 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <h4>Checkout History</h4>
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Date Loaned</th>
+                    <th>Date Returned</th>
+                    <th>Card Id</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var checkout in Model.CheckOutHistory)
+                {
+                    <tr>
+                        <td>
+                            @checkout.CheckedOut
+                        </td>
+                        <td>
+                            @checkout.CheckedIn
+                        </td>
+                        <td>
+                            @checkout.LibraryCard.Id
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6">
+        <h4>Current Holds</h4>
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Hold Placed</th>
+                    <th>Patron</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var hold in @Model.CurrentHolds)
+                {
+                    <tr>
+                        <td>
+                            @hold.HoldPlaced
+                        </td>
+                        <td>
+                            @hold.PatronName
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 </div>
