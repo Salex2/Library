@@ -63,7 +63,13 @@ namespace LibraryServices
 
         public IEnumerable<Hold> GetHolds(int patronId)
         {
-            throw new NotImplementedException();
+            var cardId = Get(patronId).LibraryCard.Id;
+
+            return _context.Holds
+                .Include(c => c.LibraryCard)
+                .Include(c => c.LibraryAsset)
+                .Where(c => c.LibraryCard.Id == cardId)
+                .OrderByDescending(c => c.HoldPlaced);
         }
     }
 }
