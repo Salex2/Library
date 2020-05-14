@@ -12,11 +12,12 @@ namespace Library.Data
         IEnumerable<CheckoutHistory> GetCheckoutHistory(int id);
         void PlaceHold(int assetId, int libraryCardId);
         void CheckoutItem(int id, int libraryCardId);
-        void CheckInItem(int id, int LibraryCardId);
+        void CheckInItem(int id);
         Checkout GetLatestCheckout(int id);
         int GetNumberOfCopies(int id);
         bool IsCheckedOut(int id);
         string GetCurrentCheckoutPatron(int assetId);
+        
 
 
         string GetCurrentHoldPatron(int id);
