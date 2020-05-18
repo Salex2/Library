@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Library.Models.Patron
 {
-    // singurul rol al clasei acesteia e sa putem pune in view direct 
+    
 
 
 

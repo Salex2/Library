@@ -41,9 +41,9 @@ namespace Library.Controllers
 
          }
 
-        public IActionResult Detail(int patronId)
+        public IActionResult Detail(int id)
         {
-            var patron = _patron.Get(patronId);
+            var patron = _patron.Get(id);
 
             var model = new PatronDetailModel
             {
@@ -54,9 +54,9 @@ namespace Library.Controllers
                 MemberSincer = patron.LibraryCard.Created,
                 OverdueFees = patron.LibraryCard.Fees,
                 LibraryCardId = patron.LibraryCard.Id,
-                AssetsCheckedOut = _patron.GetCheckouts(patronId).ToList() ?? new List<Checkout>(),
-                CheckOutHistory = _patron.GetCheckOutHistory(patronId),
-                Holds = _patron.GetHolds(patronId)
+                AssetsCheckedOut = _patron.GetCheckouts(id).ToList() ?? new List<Checkout>(),
+                CheckOutHistory = _patron.GetCheckOutHistory(id),
+                Holds = _patron.GetHolds(id)
 
             };
 
