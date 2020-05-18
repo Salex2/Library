@@ -26,36 +26,54 @@ namespace LibraryServices
 
         public LibraryBranch Get(int branchId)
         {
-            return _context.LibraryBranches
-                .Include(x => x.Patrons)
-                .Include(x => x.LibraryAssets)
+            return GetAll()
                 .FirstOrDefault(x => x.Id == branchId);
 
         }
 
         public IEnumerable<LibraryBranch> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.LibraryBranches
+                .Include(x => x.Patrons)
+                .Include(x => x.LibraryAssets);
+
         }
 
         public IEnumerable<LibraryAsset> GetAssets(int branchId)
         {
-            throw new NotImplementedException();
+            return _context.LibraryBranches
+                .Include(x => x.LibraryAssets)
+                .FirstOrDefault(x => x.Id == branchId)
+                .LibraryAssets;
+
         }
 
         public IEnumerable<string> GetBranchHours(int branchId)
         {
-            throw new NotImplementedException();
+            var hours = _context.BranchHours.Where(x => x.Branch.Id == branchId);
+            return DataHelpers.HumanizeBizHours(hours); 
+
         }
 
         public IEnumerable<Patron> GetPatrons(int branchId)
         {
-            throw new NotImplementedException();
+            return _context.LibraryBranches
+                .Include(x => x.Patrons)
+                .FirstOrDefault(x => x.Id == branchId)
+                .Patrons;
         }
 
         public bool IsBranchOpen(int branchId)
         {
-            throw new NotImplementedException();
+            var currentTimeHour = DateTime.Now.Hour;
+            var currentDayOfWeek = (int)DateTime.Now.DayOfWeek + 1;
+            var hours = _context.BranchHours.Where(x => x.Branch.Id == branchId);
+            var daysHours = hours.FirstOrDefault(x => x.DayOfWeek == currentDayOfWeek);
+
+            var isOpen = currentTimeHour < daysHours.CloseTime && currentTimeHour > daysHours.OpenTime;
+
+            return isOpen;
+
         }
     }
 }
